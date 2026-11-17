@@ -1,10 +1,8 @@
-# 💰 MCP Expense Tracker Project
+MCP Expense Tracker Project
 
 A full-stack, end-to-end implementation of the **Model Context Protocol (MCP)** demonstrating how an LLM agent communicates with a remote MCP server to manage personal finances through an interactive Chatbot.
 
----
-
-## 🏛️ Architecture Overview
+Architecture Overview
 
 This project separates the **MCP Server** (tools, logic, database) and the **MCP Client** (LLM, prompt orchestration, frontend) using standard **Streamable HTTP transport**:
 
@@ -38,51 +36,22 @@ This project separates the **MCP Server** (tools, logic, database) and the **MCP
 
 ---
 
-## ✨ Key Features
+Key Features
 
-- **🌐 Remote MCP Server over HTTP**: Built with `FastMCP`, exposing tools asynchronously over Streamable HTTP on `0.0.0.0:8000`.
-- **🧰 Dynamic Tool Discovery**: The client connects over HTTP and automatically discovers all exposed MCP tools, their parameters, and types at runtime without hardcoded tool definitions.
-- **⚡ Groq LLM Integration**: Uses high-speed LLM inference (`openai/gpt-oss-120b`, `openai/gpt-oss-20b`, or `qwen/qwen3.8-27b`) via `langchain-groq` for natural language intent parsing and tool invocation.
-- **🖥️ Streamlit Chatbot Frontend**:
+- Remote MCP Server over HTTP**: Built with `FastMCP`, exposing tools asynchronously over Streamable HTTP on `0.0.0.0:8000`.
+- Dynamic Tool Discovery**: The client connects over HTTP and automatically discovers all exposed MCP tools, their parameters, and types at runtime without hardcoded tool definitions.
+- Groq LLM Integration**: Uses high-speed LLM inference (`openai/gpt-oss-120b`, `openai/gpt-oss-20b`, or `qwen/qwen3.8-27b`) via `langchain-groq` for natural language intent parsing and tool invocation.
+- Streamlit Chatbot Frontend**:
   - Live MCP Server connection health indicator (🟢 Connected / 🔴 Offline).
   - Expandable MCP Tool execution badges revealing parameter payloads and server responses in real time.
   - One-click demo prompt buttons for quick testing.
   - Database Reset action to wipe records and start clean.
   - Secure credential handling (API keys are read silently from `.env` and never displayed in the UI).
-- **💾 SQLite Persistence**: Maintains a durable database of expenses categorized by Date, Category, Subcategory, Amount, and Notes.
+- SQLite Persistence**: Maintains a durable database of expenses categorized by Date, Category, Subcategory, Amount, and Notes.
 
 ---
 
-## 📁 Repository Structure
 
-```text
-MCP_Expenses_tracker_project/
-├── test-remote-mcp-server/       # Remote FastMCP Server (Option B)
-│   ├── main.py                   # Async FastMCP HTTP server (port 8000)
-│   ├── proxy.py                  # Proxy client example
-│   ├── categories.json           # Supported expense categories
-│   └── pyproject.toml            # Server dependencies
-│
-├── expense-tracker-mcp-server/   # Local FastMCP Server (Stdio transport)
-│   ├── main.py                   # Synchronous stdio MCP server
-│   ├── categories.json           # Categories resource
-│   └── pyproject.toml            # Dependencies
-│
-├── mcp-client/                   # MCP Client & Frontend
-│   ├── app.py                    # Streamlit Chatbot UI (Main Entry)
-│   ├── client1.py                # Standalone CLI test client
-│   ├── client2.py                # Minimal Streamlit chat interface
-│   ├── requirements.txt          # Client dependencies
-│   └── .env.example              # Sample environment configuration
-│
-├── run_server.bat / .ps1         # One-click launcher for MCP Server
-├── run_chatbot.bat / .ps1        # One-click launcher for Chatbot
-├── .env.example                  # Root environment template
-├── .gitignore                    # Git ignore file (keeps keys & DB safe)
-└── README.md                     # Project documentation
-```
-
----
 
 ## 🛠️ MCP Tools Exposed by the Server
 
@@ -94,7 +63,7 @@ MCP_Expenses_tracker_project/
 
 ---
 
-## 🚀 Getting Started
+Getting Started
 
 ### 1. Prerequisites
 - **Python 3.11+** installed
@@ -136,7 +105,7 @@ cd ..
 
 ---
 
-## 🏃 Running the Application
+Running the Application
 
 ### Step 1: Start the Remote FastMCP Server
 Run the batch file or script:
@@ -174,12 +143,3 @@ In a separate terminal, launch the Streamlit frontend:
 
 ---
 
-## 🔒 Security Best Practices
-- `.env` and `*.db` files are strictly excluded from source control via `.gitignore`.
-- API keys are handled entirely backend-side and never rendered on the web frontend.
-
----
-
-## 🙏 Acknowledgments
-- Inspired by the **CampusX** MCP series.
-- Built using [FastMCP](https://github.com/jlowin/fastmcp), [LangChain MCP Adapters](https://github.com/langchain-ai/langchain-mcp-adapters), and [Streamlit](https://streamlit.io).
